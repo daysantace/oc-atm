@@ -1,6 +1,8 @@
 local result, reason = ""
+
 do
-	local handle, chunk = component.proxy(component.list("internet")()) or error("ERROR - Internet card not detected").request("https://raw.githubusercontent.com/daysantace/oc-atm/master/src/startup/start.lua")
+	local handle, chunk = component.proxy(component.list("internet")() or error("Required internet component is missing")).request("https://raw.githubusercontent.com/daysantace/oc-atm/master/src/startup/bios.lua")
+
 	while true do
 		chunk = handle.read(math.huge)
 		
@@ -10,5 +12,6 @@ do
 			break
 		end
 	end
+
 	handle.close()
 end
