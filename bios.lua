@@ -10,5 +10,5 @@ do
 			break
 		end
 	end
-	handle.close
+	handle.close()
 end
