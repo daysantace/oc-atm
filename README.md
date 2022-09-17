@@ -1,7 +1,7 @@
 # OpenComputers digital banking - ATM module
 The ATM module for digital banking for OpenComputers.<br>
 
-##System Requirements
+## System Requirements
 |Component|Minimum|Recommended|
 |-|-|-|
 |Case|Tier 2|Tier 2|
