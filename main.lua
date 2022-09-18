@@ -16,8 +16,8 @@ if not component.isAvaliable("data") then
   print("ERROR! Data card not detected")
 end
 
-local data=component.data
-local modem=component.modem
+local modem=component.getPrimary("modem")
+local data=component.getPrimary("data")
 
 
 while true do
