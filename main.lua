@@ -6,11 +6,6 @@ local computer=require(computer)
 if computer.totalMemory()<384000 then
   term.clear()
   print("ERROR! Not enough memory")
-  computer.beep(500,0.125)
-  os.sleep
-  computer.beep(500,0.125)
-  os.sleep(0.125)
-  computer.beep(500,0.125)
 end
 
 if not component.isAvaliable("modem") then
