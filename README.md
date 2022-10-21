@@ -1,27 +1,14 @@
-# OC-ATM (ATM module)
-The ATM module for OC-ATM.<br>
-
+# OC-ATM
+OC-ATM - OpenComputers electronic banking<br>
+OC-ATM is a collection of software (intended to run in tandem) for the OpenComputers mod to supply electronic banking.<br>
+It requires the OpenSecurity mod to work as well.<br>
 ## Contribution
-Pull the repo to your pc, edit, and push.<br>
-Ask @daysantace for edit access
-
-## Installation
-Note that, while not needed for the functioning for OC-ATM itself, you need a computer with an internet card to copy.<br>
-You will also need a disk drive.<br><br>
-
-On OpenOS (or the terminal on MineOS), enter the following command.<br>
-```wget https://raw.githubusercontent.com/daysantace/oc-atm/main/main.lua```<br>
-Then, run main.lua.
-
-### System Requirements
-|Component|Minimum|Recommended|
-|-|-|-|
-|Case|Tier 2|-|
-|APU|Tier 2|-|
-|Memory|384K|512K|
-|Internal storage|1MB|-|
-|Network card|Wired|Wireless Tier 2|
-|Data card|Tier 1|-|
-|Operating system|OpenOS|-|
-|Keyboard|Yes|-|
-You will also need the OpenSecurity mod as well.
+OC-ATM is free to contribute from anyone. Please ask @daysantace for edit permissions.<br>
+Please pull the repository to your PC first before making changes.<br>
+### Translation
+As of present, OC-ATM is avaliable in English only, however, this may change soon.<br>
+You are free to implement in a translation method to OC-ATM.<br>
+### Programming
+OC-ATM needs programmers to develop.<br>
+OC-ATM is written in Lua, however most of it is very specialised to deal with the peripherals and components of OpenComputers.<br>
+Please get knowledgeable and familiar with both the Lua language and the OpenComputers libraries beforehand.<br>
