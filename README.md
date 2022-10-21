@@ -24,3 +24,4 @@ Then, run main.lua.
 |Data card|Tier 1|-|
 |Operating system|OpenOS|-|
 |Keyboard|Yes|-|
+You will also need the OpenSecurity mod as well.
