@@ -1,10 +1,9 @@
 -- get libs
-local component=require("component")
-local computer=require("computer")
-local event=require("event")
+require("event")
+require("component")
 keypad = require("component").os_keypad
-local modem=component.getPrimary("modem")
-local data=component.getPrimary("data")
+modem = component.proxy(component.modem.address)
+data = component.proxy(component.data.address)
 
 event.shouldInterrupt = function()
   return false
