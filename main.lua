@@ -2,12 +2,15 @@
 local component=require("component")
 local computer=require("computer")
 local event=require("event")
+keypad = require("component").os_keypad
 local modem=component.getPrimary("modem")
 local data=component.getPrimary("data")
 
 event.shouldInterrupt = function()
   return false
 end
+
+customButtons = {"1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "#"} 
 
 while true do
     print("Please insert your card.")
