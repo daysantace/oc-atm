@@ -5,6 +5,7 @@ keypad = require("component").os_keypad
 modem = component.proxy(component.modem.address)
 data = component.proxy(component.data.address)
 
+--init
 event.shouldInterrupt = function()
   return false
 end
@@ -12,6 +13,7 @@ end
 customButtons = {"1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "#"} 
 
 while true do
+    -- read card data
     print("Please insert your card.")
     function readCard(playerName, cardData)
       usernamecheck = playerName
@@ -20,10 +22,20 @@ while true do
     event.listen("magData", readCard())
     event.pull("interrupted")
     event.ignore("magData", readCard())
+
     -- split string
     username=string.sub(cardsplicing,1,16)
     cardnum=string.sub(cardsplicing,17,40)
-    cardID=string.sub(cardsplicing,41,80)
-    accID=string.sub(cardsplicing,81,120)
-    checksum=string.sub(cardsplicing,128,128)
+    cardFiller=string.sub(cardsplicing,41,120)
+    checksum=string.sub(cardsplicing,121,128)
+
+    -- 80 BYTE FILLER STRING SPLITTING + VERIFICATION HERE
+
+    -- do not change variable cardFiller as it'll break the checksum
+
+    -- verify card
+    if not usernamecheck == username then
+        print("VERIFY ERROR")
+        print("Card holder name and machine user name do not match")
+
 end
