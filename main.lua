@@ -1,3 +1,7 @@
+-- config
+serverAddress = -- server address
+port = -- server port
+
 -- get libs
 require("event")
 require("component")
@@ -8,6 +12,12 @@ data = component.proxy(component.data.address)
 --init
 event.shouldInterrupt = function()
   return false
+end
+
+function sleep (a) 
+  local sec = tonumber(os.clock() + a); 
+  while (os.clock() < sec) do 
+  end 
 end
 
 customButtons = {"1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "#"} 
@@ -35,7 +45,13 @@ while true do
 
     -- verify card
     if not usernamecheck == username then
-        print("VERIFY ERROR")
-        print("Card holder name and machine user name do not match")
+      print("VERIFY ERROR")
+      print("Card holder name and machine user name do not match")
+    end
+    checksumCheck = username .. cardnum .. cardFiller
+    if not string.sub(data.sha256(checksumCheck),1,8) == checksum then
+      print("VERIFY ERROR")
+      print("Checksum failed")
+    end
 
 end
