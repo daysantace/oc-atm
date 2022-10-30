@@ -1,17 +1,17 @@
 -- config
-serverAddress = -- server address
-port = -- server port
+local serverAddress = -- server address
+local port = -- server port
 
 -- get libs
-require("event")
-require("component")
-require("term")
-keypad = require("component").os_keypad
-modem = component.proxy(component.modem.address)
-data = component.proxy(component.data.address)
+local event = require("event")
+local component = require("component")
+local term = require("term")
+local keypad = require("component").os_keypad
+local modem = component.proxy(component.modem.address)
+local data = component.proxy(component.data.address)
 
 --init
-modem.setWakeMessage("ATM-WAKE")
+local modem.setWakeMessage("ATM-WAKE")
 
 event.shouldInterrupt = function()
   return false
@@ -23,8 +23,8 @@ function sleep (a)
   end 
 end
 
-keyButton = {"1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "#"} 
-keyButtonColours = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "13", "0", "14"}
+local keyButton = {"1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "0", "#"} 
+local keyButtonColours = {"0", "0", "0", "0", "0", "0", "0", "0", "0", "13", "0", "14"}
 keypad.setKey(keyButton,keyButtonColours)
 
 while true do
@@ -41,10 +41,10 @@ while true do
     event.ignore("magData", readCard())
 
     -- split string
-    username=string.sub(cardsplicing,1,16)
-    cardnum=string.sub(cardsplicing,17,40)
-    cardFiller=string.sub(cardsplicing,41,120)
-    checksum=string.sub(cardsplicing,121,128)
+    local username=string.sub(cardsplicing,1,16)
+    local cardnum=string.sub(cardsplicing,17,40)
+    local cardFiller=string.sub(cardsplicing,41,120)
+    local checksum=string.sub(cardsplicing,121,128)
 
     -- 80 BYTE FILLER STRING SPLITTING + VERIFICATION HERE
 
@@ -57,7 +57,7 @@ while true do
       sleep(3)
       goto labelVerify
     end
-    checksumCheck = username .. cardnum .. cardFiller
+    local checksumCheck = username .. cardnum .. cardFiller
     if not string.sub(data.sha256(checksumCheck),1,8) == checksum then
       print("VERIFY ERROR")
       print("Checksum failed")
