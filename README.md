@@ -1,2 +1,3 @@
-# OC-ATM (ATM/Robot)
-Submodule of the ATM module to manage deposits and withdrawals.<br>
+# OC-ATM
+Electronic banking for OpenComputers.<br>
+Installation and API guide on the wiki.
