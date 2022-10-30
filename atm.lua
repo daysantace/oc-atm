@@ -1,5 +1,6 @@
 -- config
 local serverAddress = -- server address
+local robotAddress = -- robot address (for withdrawals and deposits)
 local port = -- server port
 
 -- get libs
@@ -11,7 +12,7 @@ local modem = component.proxy(component.modem.address)
 local data = component.proxy(component.data.address)
 
 --init
-local modem.setWakeMessage("ATM-WAKE")
+modem.setWakeMessage("ATM-WAKE")
 
 event.shouldInterrupt = function()
   return false
@@ -75,11 +76,31 @@ while true do
     term.clear()
 
     -- ATM GUI
-    print("Welcome, " .. usernamecheck .. ".")
-    print("Your balance is " .. userBal .. " diamonds.") -- change diamonds to preferred cutrency
+    print("Welcome, " .. username .. ".")
+    print("Your balance is " .. userBal .. " diamonds.") -- change diamonds to preferred currency
     print("1 - Deposit")
     print("3 - Withdraw")
 
     -- get key input
     _, _, input, _ = event.pull("keypad")
+    if input == "1" then
+      -- deposit
+      print("Please deposit into the hopper below.")
+      modem.send(port,robotAddress,"req_deposit")
+      modem.open(port)
+      _, _, _, _, _, depAmt = event.pull("modem.message")
+      modem.close()
+      modem.send(port,serverAddress,"deposit " .. depAmt)
+    end
+  
+    if input == "3" then
+      -- withdraw
+      print("Please enter the amount of money you would like to withdraw.")
+      keypadInput == ""
+      _, _, input, _ = event.pull("keypad")
+      if input
+      keypadInput == keypadInput .. input
+      modem.send(port,robotAddress,"req_withdraw " .. input)
+
+    end
 end
