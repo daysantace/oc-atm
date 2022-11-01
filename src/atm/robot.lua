@@ -12,7 +12,8 @@ modem = component.proxy(component.modem.address)
 inventory = component.inventory_controller
 
 -- wait for input from ATM
-while True do
+while true do
+  ::strt::
   portMessage, _, messageCmd = event.pull("modem_message")
   if portMessage == port then
 -- deposit
@@ -49,7 +50,28 @@ while True do
 -- withdraw
     if string.sub(messageCmd,1,12) = "req_withdraw" then
       withAmt == tonumber(string.sub(messageCmd,13,string.len(messageCmd)))
-      for i=1, 27 then
+      amtStore = 0
+      -- check if enough currency in ATM
+      for i=1, 5 then
         slotCheck = inventory.getStackInSlot(3,i)
+        amtStore = amtStore .. slotCheck["size"]
+      end
+      
+      if amtStore < withAmt then
+        modem.send(atmAddress,port,"err_atmbal")
+        goto strt
+    
+      else
+        for i=1, 5 then
+          if withAmt > 64 then
+            withAmt = withAmt - 64
+          end
+          inventory.suckFromSlot(3, i, withAmt)
+          move(2)
+          move(2)
+          inventory.dropIntoSlot(2,i,withAmt)
+        end
       end
     end
+  end
+end

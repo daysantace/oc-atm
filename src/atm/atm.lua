@@ -2,6 +2,7 @@
 local serverAddress = -- server address
 local robotAddress = -- robot address (for withdrawals and deposits)
 local port = -- server port
+local currencyName = "diamond" -- localised currency name
 
 -- get libs
 local event = require("event")
@@ -73,11 +74,11 @@ while true do
     modem.open(port)
     _, _, _, _, _, userBal = event.pull("modem_message")
     modem.close()
-    term.clear()
 
     -- ATM GUI
+    term.clear()
     print("Welcome, " .. username .. ".")
-    print("Your balance is " .. userBal .. " diamonds.") -- change diamonds to preferred currency
+    print("Your balance is " .. userBal .. " " .. currencyName .. "s.")
     print("1 - Deposit")
     print("3 - Withdraw")
 
@@ -96,11 +97,42 @@ while true do
     if input == "3" then
       -- withdraw
       print("Please enter the amount of money you would like to withdraw.")
+      print("* to go back, # to confirm")
       keypadInput == ""
-      _, _, input, _ = event.pull("keypad")
-      if input
-      keypadInput == keypadInput .. input
-      modem.send(port,robotAddress,"req_withdraw " .. input)
+      _, _, _, newInput = event.pull("keypad")
+      if newInput == "*" then
+        term.clear()
+        goto labelATMGUI
+        
+      else if newInput = "#" then
+        if keypadInput == 0 or if keypadInput == nil then
+          goto labelATMGUI
+          
+        else
+          modem.send(port,robotAddress,"req_withdraw " .. input)
+          modem.open(port)
 
+        _, _, _, _, _, withStatus = event.pull("modem.message")
+          if userBal < keypadInput then
+            print("Withdraw unsuccessful.")
+            print("You do not have enough money.")
+            sleep(3)
+            goto labelATMGUI
+            
+          else if withStatus == "err_atmbal"
+            print("Withdraw unsuccessful")
+            print("The ATM does not have enough money stored.")
+            sleep(3)
+            goto labelATMGUI
+          
+          else
+            print("Withdraw successful.")
+            print("Your " .. currencyName .. "s are in the hopper below you.")
+            sleep(3)
+            goto labelATMGUI
+      else
+        keypadInput == keypadInput .. tonumber(newInput)
+      end
     end
+  end
 end
