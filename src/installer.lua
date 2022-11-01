@@ -22,4 +22,5 @@ print("6 - Relay")
 inp = io.read()
 
 -- install ATM
-pcall(internet.request, url, nil, {["user-agent"]="Wget/OpenComputers"})
+
+-- ignore this, i'll work on it at a later date. for now just wget in the files directly

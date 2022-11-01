@@ -45,6 +45,11 @@ while True do
         end
       end
     end
-  end
+
 -- withdraw
-end
+    if string.sub(messageCmd,1,12) = "req_withdraw" then
+      withAmt == tonumber(string.sub(messageCmd,13,string.len(messageCmd)))
+      for i=1, 27 then
+        slotCheck = inventory.getStackInSlot(3,i)
+      end
+    end
