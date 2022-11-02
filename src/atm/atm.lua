@@ -70,7 +70,7 @@ while true do
     -- get info from server
     :: labelATMGUI ::
     print("Loading...")
-    modem.send(port,serverAddress,"req_bal")
+    modem.send(port,serverAddress,"req_bal" .. username)
     modem.open(port)
     _, _, _, _, _, userBal = event.pull("modem_message")
     modem.close()
@@ -128,6 +128,7 @@ while true do
           else
             print("Withdraw successful.")
             print("Your " .. currencyName .. "s are in the hopper below you.")
+            modem.send(port,serverAddress,"with" .. keypadInput .. username)
             sleep(3)
             goto labelATMGUI
       else
