@@ -128,7 +128,7 @@ while true do
           else
             print("Withdraw successful.")
             print("Your " .. currencyName .. "s are in the hopper below you.")
-            modem.send(port,serverAddress,"with" .. keypadInput .. username)
+            modem.send(port,serverAddress,"with" .. keypadInput .. "/" .. username)
             sleep(3)
             goto labelATMGUI
       else
