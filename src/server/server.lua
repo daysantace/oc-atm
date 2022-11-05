@@ -30,5 +30,5 @@ while True do
 
     if string.sub(modemMessage,1,4) == "with" then
         -- withdrawal
-        modem.send(portPrivate,dataAddress,"deduct" .. string.sub(modemMessage,7,string.len(modemMessage)))
+        modem.send(portPrivate,dataAddress,"deduct" .. string.sub(modemMessage,5,string.len(modemMessage)))
     end
